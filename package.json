@@ -1,0 +1,23 @@
+{
+  "name": "Sisyphus",
+  "version": "0.0.0",
+  "description": "tool based on gulpjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xingyan/Sisyphus.git"
+  },
+  "keywords": [
+    "tool",
+    "javascript"
+  ],
+  "author": "yanx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xingyan/Sisyphus/issues"
+  },
+  "homepage": "https://github.com/xingyan/Sisyphus"
+}
