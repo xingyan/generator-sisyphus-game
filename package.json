@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/xingyan/Sisyphus/issues"
   },
-  "homepage": "https://github.com/xingyan/Sisyphus"
+  "homepage": "https://github.com/xingyan/Sisyphus",
+  "devDependencies": {
+    "gulp": "^3.8.10"
+  }
 }
