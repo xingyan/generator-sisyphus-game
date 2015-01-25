@@ -17,5 +17,16 @@
   "peerDependencies": {
     "yo": ">=1.0.0",
     "gulp": ">=3.5.0"
+
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xingyan/generator-sisyphus-game.git"
+  },
+  "keywords": [
+    "tool",
+    "javascript"
+  ],
+  "author": "yanx",
+  "license": "MIT",
   }
 }
