@@ -37,12 +37,13 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   prompting: function () {
-    var done = this.async();
+    //var done = this.async();
     /*
     if (!this.options['skip-welcome-message']) {
       this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile.js to build your app.'));
     }
     */
+    /*
     var prompts = [{
       type: 'checkbox',
       name: 'features',
@@ -77,6 +78,8 @@ module.exports = yeoman.generators.Base.extend({
 
       done();
     }.bind(this));
+    */
+    this.includeSass = false;
     console.log('prompting');
   },
 
@@ -91,6 +94,17 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
     gulpfile: function() {
       this.template('gulpfile.js');
+    },
+    app: function () {
+      this.mkdir('app');
+      this.mkdir('app/scripts');
+      this.mkdir('app/styles');
+      this.mkdir('app/images');
+      this.mkdir('app/fonts');
+      //this.copy('main.js', 'app/scripts/main.js');
+    },
+    npmpackage: function() {
+      console.log("leishen's package here");
     }
   },
 
