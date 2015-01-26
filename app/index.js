@@ -3,7 +3,9 @@
 var
     yeoman = require('yeoman-generator'),
 
-    yosay = require('yosay');
+    inquirer = require('inquirer'),
+
+    _ = require('lodash');
 
 module.exports = yeoman.generators.Base.extend({
   constructor: function () {
@@ -37,50 +39,45 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   prompting: function () {
-    //var done = this.async();
-    /*
-    if (!this.options['skip-welcome-message']) {
-      this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile.js to build your app.'));
-    }
-    */
-    /*
-    var prompts = [{
-      type: 'checkbox',
+    var done = this.async();
+    var configList = [{
+      name: 'SeaJs_Project',
+      value: 'seajsPrj',
+      checked: true
+    }, {
+      name: 'Require_Project',
+      value: 'requirePrj',
+      checked: false
+    }, {
+      name: 'SacredRelic_Project',
+      value: 'sacredrelicPrj',
+      checked: false
+    }, {
+      name: 'Angular_Project',
+      value: 'angularPrj',
+      checked: false
+    }];
+    var prompts =
+      [{
+      type: 'list',
       name: 'features',
       message: 'What more would you like?',
-      choices: [{
-        name: 'Sass',
-        value: 'includeSass',
-        checked: true
-      }, {
-        name: 'Bootstrap',
-        value: 'includeBootstrap',
-        checked: true
-      }, {
-        name: 'Modernizr',
-        value: 'includeModernizr',
-        checked: true
-      }]
+      choices: _.flatten([
+        new inquirer.Separator('Choose a project template'),
+        new inquirer.Separator(),
+        configList,
+        new inquirer.Separator()
+      ])
     }];
 
     this.prompt(prompts, function (answers) {
+      console.log(answers);
       var features = answers.features;
-
-      var hasFeature = function (feat) {
-        return features.indexOf(feat) !== -1;
-      };
-
-      // manually deal with the response, get back and store the results.
-      // we change a bit this way of doing to automatically do this in the self.prompt() method.
-      this.includeSass = hasFeature('includeSass');
-      this.includeBootstrap = hasFeature('includeBootstrap');
-      this.includeModernizr = hasFeature('includeModernizr');
-
+      this.prjType = features;
+      //暂时容错
+      this.includeSass = false;
       done();
     }.bind(this));
-    */
-    this.includeSass = false;
-    console.log('prompting');
   },
 
   configuring: function() {

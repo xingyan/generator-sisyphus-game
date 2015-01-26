@@ -11,8 +11,7 @@
   "dependencies": {
     "chalk": "^0.5.1",
     "wiredep": "^2.2.2",
-    "yeoman-generator": "^0.18.5",
-    "yosay": "^1.0.0"
+    "yeoman-generator": "^0.18.5"
   },
   "peerDependencies": {
     "yo": ">=1.0.0",
@@ -25,5 +24,9 @@
   "keywords": [
     "tool",
     "javascript"
-  ]
+  ],
+  "devDependencies": {
+    "inquirer": "^0.8.0",
+    "lodash": "^2.4.1"
+  }
 }
