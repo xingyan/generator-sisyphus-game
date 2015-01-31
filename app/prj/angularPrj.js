@@ -25,7 +25,7 @@ var
      */
     initialize: function() {
       BasePrj.prototype.initialize.apply(this, arguments);
-      this.staticResourceList = [];
+      this.defaultResourceList = [];
     },
 
     CLASS_NAME: 'AngularPrj'

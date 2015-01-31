@@ -25,7 +25,8 @@ var
      */
     initialize: function() {
       BasePrj.prototype.initialize.apply(this, arguments);
-      this.staticResourceList = [{
+      this.root = 'angular/';
+      this.defaultResourceList = [{
         name: 'Underscore',
         value: 'includeUnderscore',
         checked: true

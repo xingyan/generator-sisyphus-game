@@ -65,6 +65,14 @@ module.exports = yeoman.generators.Base.extend({
       name: 'JQuery',
       value: 'includeJQuery',
       checked: true
+    }, {
+      name: 'Less',
+      value: 'includeLess',
+      checked: false
+    }, {
+      name: 'Sass',
+      value: 'includeSass',
+      checked: true
     }];
     var prompts = [{
       type: 'checkbox',
@@ -72,7 +80,7 @@ module.exports = yeoman.generators.Base.extend({
       message: 'What more would you like?',
       choices: _.flatten([
         defaultConfig,
-        this.prjTypeConfig.staticResourceList
+        this.prjTypeConfig.defaultResourceList
       ])
     }];
     this.prompt(prompts, function(answers) {
@@ -92,7 +100,10 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     gulpfile: function() {
-    //  this.template('gulpfile.js');
+      this.prjTypeConfig.initGulp && this.prjTypeConfig.initGulp();
+    },
+    packageJSON: function() {
+      this.prjTypeConfig.initPackageJSON && this.prjTypeConfig.initPackageJSON();
     },
     app: function () {
     //  this.prjTypeConfig.buildApp();
@@ -115,7 +126,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   install: function() {
-  //  console.log('install');
+    this.installDependencies();
   },
 
   end: function() {
