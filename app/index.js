@@ -14,6 +14,26 @@ var
 module.exports = yeoman.generators.Base.extend({
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
+    this.option('test-framework', {
+      desc: 'Test framework to be invoked',
+      type: String,
+      defaults: 'mocha'
+    });
+
+    this.option('skip-welcome-message', {
+      desc: 'Skips the welcome message',
+      type: Boolean
+    });
+
+    this.option('skip-install', {
+      desc: 'Skips the installation of dependencies',
+      type: Boolean
+    });
+
+    this.option('skip-install-message', {
+      desc: 'Skips the message  after the installation of dependencies',
+      type: Boolean
+    });
   },
 
   initializing: function () {
@@ -106,7 +126,7 @@ module.exports = yeoman.generators.Base.extend({
       this.prjTypeConfig.initPackageJSON && this.prjTypeConfig.initPackageJSON();
     },
     app: function () {
-    //  this.prjTypeConfig.buildApp();
+      this.prjTypeConfig.buildApp();
       /*
       this.mkdir('app');
       this.mkdir('app/scripts');
@@ -126,7 +146,9 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   install: function() {
-    this.installDependencies();
+    this.installDependencies({
+      bower: false
+    });
   },
 
   end: function() {

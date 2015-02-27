@@ -1,6 +1,6 @@
 {
   "name": "generator-sisyphus-game",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a yeoman generator for pylon team",
   "main": "app/index.js",
   "scripts": {
@@ -27,7 +27,6 @@
   ],
   "devDependencies": {
     "inquirer": "^0.8.0",
-    "lodash": "^2.4.1",
-    "q": "^1.1.2"
+    "lodash": "^2.4.1"
   }
 }

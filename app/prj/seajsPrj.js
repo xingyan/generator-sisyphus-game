@@ -25,7 +25,7 @@ var
      */
     initialize: function() {
       BasePrj.prototype.initialize.apply(this, arguments);
-      this.root = 'angular/';
+      this.root = 'seajs/';
       this.defaultResourceList = [{
         name: 'Underscore',
         value: 'includeUnderscore',
@@ -35,6 +35,22 @@ var
         value: 'includeHandlerBar',
         checked: true
       }];
+    },
+
+    /**
+     * @method buildApp
+     * @desc 生成seajs的基础目录
+     */
+    buildApp: function() {
+      if(!this.ins) return;
+      this.ins.mkdir('src');
+      this.ins.mkdir('src/tpl');
+      this.ins.mkdir('src/js');
+      this.ins.mkdir('src/css');
+      this.ins.mkdir('src/img');
+      this.ins.mkdir('src/fonts');
+      this.ins.mkdir('src/doc');
+      this.ins.mkdir('src/html');
     },
 
     CLASS_NAME: 'SeaJsPrj'
