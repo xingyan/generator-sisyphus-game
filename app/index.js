@@ -44,20 +44,16 @@ module.exports = yeoman.generators.Base.extend({
     var done = this.async();
     var configList = [{
       name: 'SeaJs_Project',
-      value: 'seajsPrj',
-      checked: true
+      value: 'seajsPrj'
     }, {
       name: 'Require_Project',
-      value: 'requirePrj',
-      checked: false
+      value: 'requirePrj'
     }, {
       name: 'SacredRelic_Project',
-      value: 'sacredrelicPrj',
-      checked: false
+      value: 'sacredrelicPrj'
     }, {
       name: 'Angular_Project',
-      value: 'angularPrj',
-      checked: false
+      value: 'angularPrj'
     }];
     var prompts =
       [{
@@ -79,43 +75,50 @@ module.exports = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
-  configStaticResource: function() {
-    var done = this.async();
+  configCssPreprocessor: function() {
+    if(!this.prjTypeConfig) return;
     var defaultConfig = [{
-      name: 'JQuery',
-      value: 'includeJQuery',
-      checked: true
-    }, {
       name: 'Less',
       value: 'includeLess',
-      checked: false
-    }, {
-      name: 'Sass',
-      value: 'includeSass',
       checked: true
     }];
-    var prompts = [{
+    this.prjTypeConfig.configuringPrompt({
+      type: 'checkbox',
+      name: 'features',
+      message: 'What CSS preprocessor would you like?',
+      choices: defaultConfig
+    });
+  },
+
+  configTemplate: function() {
+    if(!this.prjTypeConfig) return;
+    var defaultConfig = [{
+      name: 'Underscore',
+      value: 'includeUnderscore'
+    }, {
+      name: 'HandlerBar',
+      value: 'includeHandlerBar'
+    }];
+    this.prjTypeConfig.configuringPrompt({
+      type: 'list',
+      name: 'features',
+      message: 'What FE template would you like?',
+      choices: defaultConfig
+    });
+  },
+
+  configStaticResource: function() {
+    if(!this.prjTypeConfig || this.prjTypeConfig.defaultResourceList.length == 0)  return;
+    this.prjTypeConfig.configuringPrompt({
       type: 'checkbox',
       name: 'features',
       message: 'What more would you like?',
-      choices: _.flatten([
-        defaultConfig,
-        this.prjTypeConfig.defaultResourceList
-      ])
-    }];
-    this.prompt(prompts, function(answers) {
-      var features = answers.features;
-      this.prjTypeConfig.initResourceList(features);
-      done();
-    }.bind(this));
-  },
-
-  configuring: function() {
-  //  this.prjTypeConfig.configuring(arguments);
+      choices: this.prjTypeConfig.defaultResourceList
+    });
   },
 
   'default': function() {
-    console.log('default');
+    //console.log('default');
   },
 
   writing: {
@@ -125,17 +128,16 @@ module.exports = yeoman.generators.Base.extend({
     packageJSON: function() {
       this.prjTypeConfig.initPackageJSON && this.prjTypeConfig.initPackageJSON();
     },
-    app: function () {
-      this.prjTypeConfig.buildApp();
-      /*
-      this.mkdir('app');
-      this.mkdir('app/scripts');
-      this.mkdir('app/styles');
-      this.mkdir('app/images');
-      this.mkdir('app/fonts');
-      //this.copy('main.js', 'app/scripts/main.js');
-      */
+    mainStylesheet: function () {
+      this.prjTypeConfig.mainStylesheet && this.prjTypeConfig.mainStylesheet();
     },
+    app: function () {
+      this.prjTypeConfig.buildApp && this.prjTypeConfig.buildApp();
+    },
+    writeIndex: function() {
+      this.prjTypeConfig.writeIndex && this.prjTypeConfig.writeIndex();
+    },
+
     npmpackage: function() {
     //  console.log("leishen's package here");
     }
